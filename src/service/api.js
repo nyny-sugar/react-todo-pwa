@@ -32,3 +32,9 @@ export const todoDelete = (id) => {
   db.collection("todo").doc(id).delete();
 }
 
+export const toggleComple = async (id) => {
+  const todo = await db.collection("todo").doc(id).get();
+  return db.collection("todo").doc(id).update({
+    isComplete: todo.data().isComplete ? false : true,
+  });
+}
